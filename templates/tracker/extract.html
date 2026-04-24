@@ -1,0 +1,36 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-card">
+        <h1>Extract Hidden Audio</h1>
+        <p class="subtitle">Upload the hidden image and enter the correct password to recover the audio.</p>
+
+        <form method="POST" enctype="multipart/form-data" class="modern-form">
+            {% csrf_token %}
+
+            <label>Hidden Image</label>
+            <input type="file" name="image" accept="image/*" required onchange="previewFile(event, 'imagePreview')">
+
+            <img id="imagePreview" class="preview-img" style="display:none;">
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter password" required>
+
+            <button type="submit" class="btn primary full">Extract Audio</button>
+        </form>
+
+        {% if message %}
+            <div class="alert">{{ message }}</div>
+        {% endif %}
+
+        {% if audio_url %}
+            <audio controls class="audio-output">
+                <source src="{{ audio_url }}">
+            </audio>
+
+            <a href="{{ audio_url }}" download class="download-btn">Download Extracted Audio</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

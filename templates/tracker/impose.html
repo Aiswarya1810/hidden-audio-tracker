@@ -1,0 +1,37 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-card">
+        <h1>Hide Audio Inside Image</h1>
+        <p class="subtitle">Upload an image, audio file, and password to create a secure hidden image.</p>
+
+        <form method="POST" enctype="multipart/form-data" class="modern-form">
+            {% csrf_token %}
+
+            <label>Carrier Image</label>
+            <input type="file" name="image" accept="image/*" required onchange="previewFile(event, 'imagePreview')">
+
+            <img id="imagePreview" class="preview-img" style="display:none;">
+
+            <label>Secret Audio</label>
+            <input type="file" name="audio" accept="audio/*" required onchange="previewAudio(event)">
+
+            <audio id="audioPreview" controls style="display:none;"></audio>
+
+            <label>Password</label>
+            <input type="password" name="password" placeholder="Enter strong password" required>
+
+            <button type="submit" class="btn primary full">Hide Audio</button>
+        </form>
+
+        {% if message %}
+            <div class="alert">{{ message }}</div>
+        {% endif %}
+
+        {% if output_file_url %}
+            <a href="{{ output_file_url }}" download class="download-btn">Download Hidden Image</a>
+        {% endif %}
+    </div>
+</section>
+{% endblock %}

@@ -1,0 +1,50 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="badge">Secure Audio Steganography</span>
+
+        <h1>Hide Secret Audio Inside Images</h1>
+
+        <p>
+            A cybersecurity web app that encrypts audio files and hides them inside images.
+            Share the image safely and extract the audio later using your password.
+        </p>
+
+        <div class="hero-buttons">
+            <a href="/impose/" class="btn primary">Hide Audio</a>
+            <a href="/extract/" class="btn secondary">Extract Audio</a>
+        </div>
+    </div>
+
+    <div class="hero-card">
+        <div class="card-icon">🔐</div>
+        <h2>How it works</h2>
+        <ul>
+            <li>Upload an image</li>
+            <li>Upload an audio file</li>
+            <li>Encrypt with password</li>
+            <li>Download hidden image</li>
+            <li>Extract audio later</li>
+        </ul>
+    </div>
+</section>
+
+<section class="features">
+    <div class="feature-card">
+        <h3>🖼 Image Carrier</h3>
+        <p>Uses image files as carriers for secret audio data.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🎵 Audio Hiding</h3>
+        <p>Hides encrypted audio inside image pixels using steganography.</p>
+    </div>
+
+    <div class="feature-card">
+        <h3>🔑 Password Security</h3>
+        <p>Only the correct password can extract the original audio.</p>
+    </div>
+</section>
+{% endblock %}
