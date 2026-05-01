@@ -1,0 +1,31 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-card">
+        <h1>Create Profile</h1>
+        <p class="subtitle">Join Hidden Audio Tracker and send secure audio messages.</p>
+
+        <form method="POST" class="modern-form">
+            {% csrf_token %}
+
+            <label>Full Name</label>
+            <input type="text" name="full_name" required>
+
+            <label>Username</label>
+            <input type="text" name="username" required>
+
+            <label>Email</label>
+            <input type="email" name="email" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            <label>Confirm Password</label>
+            <input type="password" name="confirm_password" required>
+
+            <button class="btn primary full">Create Account</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

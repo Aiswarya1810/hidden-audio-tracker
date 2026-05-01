@@ -11,10 +11,20 @@
 <nav class="navbar">
     <div class="logo">🎧 Hidden Audioo Tracker</div>
     <div class="nav-links">
-        <a href="/">Home</a>
-        <a href="/impose/">Hide Audio</a>
-        <a href="/extract/">Extract Audio</a>
-    </div>
+    <a href="/">Home</a>
+
+    {% if user.is_authenticated %}
+        <a href="/dashboard/">Dashboard</a>
+        <a href="/send/">Send</a>
+        <a href="/inbox/">Inbox</a>
+        <a href="/outbox/">Outbox</a>
+        <a href="/profile/">Profile</a>
+        <a href="/logout/">Logout</a>
+    {% else %}
+        <a href="/login/">Login</a>
+        <a href="/signup/">Signup</a>
+    {% endif %}
+</div>
 </nav>
 
 {% block content %}

@@ -1,0 +1,93 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="detail-page">
+    <div class="detail-card">
+
+        <div class="detail-header">
+            <div>
+                <h1>{{ secure_message.subject }}</h1>
+                <p><strong>From:</strong> {{ secure_message.sender.username }}</p>
+                <p><strong>To:</strong> {{ secure_message.receiver.username }}</p>
+                <p><strong>Date:</strong> {{ secure_message.created_at }}</p>
+            </div>
+
+            {% if secure_message.is_read %}
+                <span class="status-badge">Read</span>
+            {% else %}
+                <span class="status-badge unread">Unread</span>
+            {% endif %}
+        </div>
+
+        {% if secure_message.note %}
+            <div class="note-box">
+                <h3>Note</h3>
+                <p>{{ secure_message.note }}</p>
+            </div>
+        {% endif %}
+
+        <div class="image-box">
+    <h3>Hidden Image</h3>
+
+    {% if secure_message.hidden_image %}
+        <img 
+    src="{{ secure_message.hidden_image.url }}" 
+    alt="Hidden Image"
+    style="width: 350px; max-width: 100%; height: auto; object-fit: contain; border-radius: 14px; display: block;"
+>
+
+        <a href="{{ secure_message.hidden_image.url }}" download class="btn primary">
+            Download Hidden Image
+        </a>
+    {% else %}
+        <p>No hidden image available.</p>
+    {% endif %}
+</div>
+
+        {% if request.user == secure_message.receiver %}
+            <div class="unlock-box">
+                <h3>Unlock Hidden Audio</h3>
+                <p>Enter the secret password shared by the sender.</p>
+
+                <form method="POST">
+                    {% csrf_token %}
+                    <input 
+                        type="password" 
+                        name="password" 
+                        placeholder="Enter password"
+                        required
+                        class="form-input"
+                    >
+
+                    <button type="submit" class="btn primary">
+                        Unlock Audio
+                    </button>
+                </form>
+            </div>
+        {% endif %}
+
+        {% if unlocked and extracted_audio_url %}
+            <div class="audio-box">
+                <h3>Extracted Audio</h3>
+
+                <audio controls>
+                    <source src="{{ extracted_audio_url }}" type="audio/wav">
+                    Your browser does not support audio.
+                </audio>
+
+                <br>
+
+                <a href="{{ extracted_audio_url }}" download class="btn primary">
+                    Download Audio
+                </a>
+            </div>
+        {% endif %}
+
+        <div class="detail-actions">
+            <a href="{% url 'inbox' %}" class="btn secondary">Back to Inbox</a>
+            <a href="{% url 'outbox' %}" class="btn secondary">Back to Outbox</a>
+        </div>
+
+    </div>
+</section>
+{% endblock %}

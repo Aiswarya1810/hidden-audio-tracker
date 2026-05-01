@@ -1,0 +1,25 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="hero">
+    <div class="hero-content">
+        <span class="badge">Welcome, {{ user.username }}</span>
+        <h1>Your Secure Dashboard</h1>
+        <p>Send encrypted audio hidden inside images and manage your secure inbox.</p>
+
+        <div class="hero-buttons">
+            <a href="/send/" class="btn primary">Send Message</a>
+            <a href="/inbox/" class="btn secondary">View Inbox</a>
+        </div>
+    </div>
+
+    <div class="hero-card">
+        <h2>Account Stats</h2>
+        <ul>
+            <li>Sent Messages: {{ sent_count }}</li>
+            <li>Received Messages: {{ inbox_count }}</li>
+            <li>Unread Messages: {{ unread_count }}</li>
+        </ul>
+    </div>
+</section>
+{% endblock %}

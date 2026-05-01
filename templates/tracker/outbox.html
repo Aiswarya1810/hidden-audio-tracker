@@ -1,0 +1,23 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="table-page">
+    <div class="table-card">
+        <h1>Outbox</h1>
+
+        {% for msg in messages_list %}
+            <div class="message-row">
+                <div>
+                    <h3>{{ msg.subject }}</h3>
+                    <p>To: {{ msg.receiver.username }}</p>
+                    <small>{{ msg.created_at }}</small>
+                </div>
+
+                <a href="{% url 'message_detail' msg.id %}" class="btn primary">View</a>
+            </div>
+        {% empty %}
+            <p>No messages sent yet.</p>
+        {% endfor %}
+    </div>
+</section>
+{% endblock %}

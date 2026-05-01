@@ -1,0 +1,34 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-card">
+        <h1>My Profile</h1>
+
+        {% if profile.avatar %}
+            <img src="{{ profile.avatar.url }}" class="profile-img">
+        {% endif %}
+
+        <form method="POST" enctype="multipart/form-data" class="modern-form">
+            {% csrf_token %}
+
+            <label>Profile Image</label>
+            <input type="file" name="avatar">
+
+            <label>Full Name</label>
+            <input type="text" name="full_name" value="{{ profile.full_name }}">
+
+            <label>Phone</label>
+            <input type="text" name="phone" value="{{ profile.phone }}">
+
+            <label>Location</label>
+            <input type="text" name="location" value="{{ profile.location }}">
+
+            <label>Bio</label>
+            <textarea name="bio">{{ profile.bio }}</textarea>
+
+            <button class="btn primary full">Update Profile</button>
+        </form>
+    </div>
+</section>
+{% endblock %}

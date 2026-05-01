@@ -1,0 +1,22 @@
+{% extends 'tracker/base.html' %}
+
+{% block content %}
+<section class="form-page">
+    <div class="form-card">
+        <h1>Login</h1>
+        <p class="subtitle">Access your secure inbox and hidden audio messages.</p>
+
+        <form method="POST" class="modern-form">
+            {% csrf_token %}
+
+            <label>Username</label>
+            <input type="text" name="username" required>
+
+            <label>Password</label>
+            <input type="password" name="password" required>
+
+            <button class="btn primary full">Login</button>
+        </form>
+    </div>
+</section>
+{% endblock %}
