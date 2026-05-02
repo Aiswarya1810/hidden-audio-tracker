@@ -416,9 +416,7 @@ body {
 .detail-actions {
     margin-top: 28px;
     display: flex;
-  
     flex-wrap: wrap;
-   
     justify-content: center;   
     gap: 16px;
 }
